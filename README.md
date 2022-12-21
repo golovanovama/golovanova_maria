@@ -37,7 +37,46 @@ sudo mkdir jbrowse
 cd /mnt
 sudo mkdir JBrowse
 cd JBrowse
-sudo wget https://jbrowse.org/jb2/
+sudo wget 
+```
+_then i need to install program to unzip files_
+```
+sudo apt install unzip
+/mnt/JBrowse$ sudo unzip jbrowse-web-v2.3.1.zip
+cd /etc/nginx/
+/etc/nginx$ sudo nano nginx.conf
+/etc/nginx$ sudo /etc/init.d/nginx reload
+/etc/nginx$ cd mnt
+/mnt$ cd JBrowse
+/mnt/JBrowse$ cp jbrowse-web-v2.3.1.zip /var/www/html/jbrowse
+/mnt/JBrowse$ cd /var/www/html/jbrowse
+/var/www/html/jbrowse$ sudo unzip jbrowse-web-v2.3.1.zip
+sudo gunzip Homo_sapiens.GRCh38.108.gff3.gz
+
+sort -k1,1 -k4,4n Homo_sapiens.GRCh38.108.gff3.gz > homo-sapiens.sorted.gff3
+
+sudo apt install bgzip Не получилось 
+sudo apt install htslib
+sudo apt update
+sudo apt install tabix
+sudo apt install pip
+sudo pip install bgzip
+
+
+sudo bgzip homo-sapiens.sorted.gff3
+tabix -p gff homo-sapiens.sorted.gff3.gz
+
+sudo apt install samtools
+samtools faidx смотрим параметры
+
+samtools faidx Homo_sapiens.GRCh38.dna.primary_assembly.fa
+sudo jbrowse add-track homo-sapiens.sorted.gff3.gz --load copy Не сработало, установим
+sudo apt install npm
+
+
+
+
+
 
 ```
 _Downloaded the latest human genome assembly (GRCh38) from the Ensemble FTP server (fasta, GFF3). Index the fasta using samtools (samtools faidx) and GFF3 using tabix.
