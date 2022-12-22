@@ -10,6 +10,7 @@ Docker uses a client-server architecture. The Docker client talks to the Docker 
 
 **[0.25] Name and describe at least one Docker competitor (i.e., a tool based on the same containerization technology).**
 RunC, formerly a module embedded into the Docker architecture, was released in 2015 as a standalone tool. It has since then become a widely used, standardized, interoperable container runtime DevOps teams can use as part of Docker or other custom container engines. RunC belongs to the container runtime section of the containerization ecosystem. A container runtime is a lower-level component used in a container engine that handles the running of containers. 
+
 **[0.25] What is conda? How it differs from apt, yarn, and others?**
 Conda is a multi-platform open-source package management system. It was initially created to solve package management problems for Python data scientists.Because conda arose from within the Python (more specifically PyData) community, many mistakenly assume that it is fundamentally a Python package manager. This is not the case: conda is designed to manage packages and dependencies within any software stack. In this sense, it's less like pip, and more like a cross-platform version of apt or yum. If you want to flexibly manage a multi-language software stack and don't mind using an isolated environment, use conda. Conda's multi-language dependency management and cross-platform binary installations can do things in this situation that pip cannot do. A huge benefit is that for most packages, the result will be immediately compatible with multiple operating systems.
 
@@ -26,6 +27,7 @@ sudo wget https://repo.anaconda.com/achive/Anaconda3-2022.10-Linux-x86_64.sh
 
 #To run it, you need to set the necessary access rights
 chmod a+x ./Anaconda3-2022.10-Linux-x86_64.sh
+./Anaconda3-2022.10-Linux-x86_64.sh
 
 #waiting for installing
 #create virtual environment in anaconda
@@ -60,8 +62,8 @@ conda env create -f bioenv.yml
 conda env list
 ```
 Docker
-Устанавливала с оф.сайта по документации https://docs.docker.com/engine/install/ubuntu/
-Создала dockerfile, создала образ и запустила его, добавила автора, версию и описание.
+Установила выше.
+Собрала образ, запустила его, добавила название, автора и описание
 
 Dockerfile is done:
 ```
