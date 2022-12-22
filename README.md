@@ -19,29 +19,29 @@ several alternative web servers - Caddy, Apache HTTP Server, lighttpd.
 SSH, also known as Secure Shell or Secure Socket Shell, is a network protocol that gives users, particularly system administrators, a secure way to access a computer over an unsecured network.SSH enables the same functions -- logging in to and running terminal sessions on remote systems. SSH also replaces file transfer programs, such as File Transfer Protocol (FTP) and rcp (remote copy).The most basic use of SSH is to connect to a remote host for a terminal session. In addition to creating a secure channel between local and remote computers, SSH is used to manage routers, server hardware, virtualization platforms, operating systems (OSes), and inside systems management and file transfer applications. Secure Shell is used to connect to servers, make changes, perform uploads and exit, either using tools or directly through the terminal. SSH keys can be employed to automate access to servers and often are used in scripts, backup systems and configuration management tools.
 ## Problem 
 ```
-#_Created a new virtual machine in the Yandex cloud. Generated SSH key pair and used it_
-#_I have Windows on my computer, so i generated SSH key there_
+# _Created a new virtual machine in the Yandex cloud. Generated SSH key pair and used it_
+# _I have Windows on my computer, so i generated SSH key there_
 
 ssh-keygen -t rsa -b 2048
 
-#_then i created my VM and called it - golovanova3_
-#_then it started working_
+# _then i created my VM and called it - golovanova3_
+# _then it started working_
 
 C:\Users\79202>ssh golovanova3@62.84.118.93
 golovanova3@golovanova3: ~$ sudo apt update
 
-#_getting nessesary files_
+# _getting nessesary files_
 
 sudo wget https://ftp.ensembl.org/pub/release-108/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
 sudo wget https://ftp.ensembl.org/pub/release-108/gff3/homo_sapiens/Homo_sapiens.GRCh38.108.gff3.gz
 
-#_then i installed nginx_
-```
+# _then i installed nginx_
+
 sudo apt install nginx
 cd/var
 ls
 
-#_checked if the nessesary directory exists and continued the work_
+# _checked if the nessesary directory exists and continued the work_
 
 cd www
 cd html
@@ -51,7 +51,7 @@ sudo mkdir JBrowse
 cd JBrowse
 sudo wget https://jbrowse.org/jb2/
 
-#_then i need to install program to unzip files_
+# _then i need to install program to unzip files_
 
 sudo apt install unzip
 /mnt/JBrowse$ sudo unzip jbrowse-web-v2.3.1.zip
@@ -65,24 +65,24 @@ cd /etc/nginx/
 /var/www/html/jbrowse$ sudo unzip jbrowse-web-v2.3.1.zip
 sudo gunzip Homo_sapiens.GRCh38.108.gff3.gz
 
-#_i dont know is it nessesary to write the whole path, but i think it is clear_
-#_tried to install bgzip but got a mistake_
+# _i dont know is it nessesary to write the whole path, but i think it is clear_
+# _tried to install bgzip but got a mistake_
 sudo apt install bgzip
 
-#_tried this method_
+# _tried this method_
 sudo apt install htslib
 sudo apt update
 sudo apt install tabix
 sudo apt install pip
 sudo pip install bgzip
 
-#_Sort, bgzip, and index using tabix_
+# _Sort, bgzip, and index using tabix_
 gunzip Homo_sapiens.GRCh38.108.gff3.gz
 awk '$1 ~ /^#/ {print $0;next} {print $0 | "sort -t\"\t\" -k1,1 -k4,4n"}' Homo_sapiens.GRCh38.108.gff3 > homo-sapiens.sorted.gff3
 bgzip homo-sapiens.sorted.gff3
 tabix homo-sapiens.sorted.gff3.gz
 
-#_adiing to the jbrowse_
+# _adiing to the jbrowse_
 sudo jbrowse add-track homo-sapiens.sorted.gff3.gz --load copy --out   /mnt/JBrowse/config.json
 
 #_it is written that it's added but i didn't get the result immidietly, but now everything is okey i guess_
@@ -92,15 +92,15 @@ samtools faidx
 samtools faidx Homo_sapiens.GRCh38.dna.primary_assembly.fa
 sudo jbrowse add-track homo-sapiens.sorted.gff3.gz --load copy 
 
-#_got the error_
+# _got the error_
 sudo apt install npm
 sudo npm install -g @jbrowse/cli
 jbrowse --version
 sudo jbrowse add-track Homo_sapiens.GRCh38.dna.primary_assembly.fa --load copy --out /var/www/html/jbrowse
 
-#_added assembly to .... /jbrowse/config.json
+# _added assembly to .... /jbrowse/config.json_
 ```
-
+У меня не сразу получалось добавить треки на браузер, видимо нужно было время, но теперь там несколько моих попыток понять, что происходит))
 Ссылка на браузер : ![JBrowse](http://62.84.118.93/jbrowse/?session=local-JG2Pu6WXo)
 
 **[0.5] Give an in-depth explanation of the OSI model and how the TCP/IP stack works. Don't copy-paste descriptions from the internet; paraphrase and shorten as much as possible (imagine writing a cheat sheet for yourself)**
